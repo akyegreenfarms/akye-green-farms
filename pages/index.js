@@ -20,9 +20,10 @@ export default function Home() {
   };
 
   return (
-    <div style={container}>
-      {/* Top Bar */}
-      <div style={topBar}>
+    <div style={{ fontFamily: "Arial, sans-serif" }}>
+      
+      {/* 🔝 TOP NAVIGATION ONLY */}
+      <header style={nav}>
         <h2>Akye Green Farms</h2>
 
         {!user ? (
@@ -36,27 +37,33 @@ export default function Home() {
             <button onClick={logout} style={logoutBtn}>Logout</button>
           </div>
         )}
-      </div>
+      </header>
 
-      {/* Hero */}
-      <div style={hero}>
-        <h1>Integrated Rubber Plantation Investment</h1>
-        <p>
-          A long-term agribusiness platform combining plantation development
-          and future processing for sustainable value creation.
-        </p>
-      </div>
+      {/* ✅ YOUR EXISTING HOMEPAGE CONTENT STAYS HERE */}
+      <main>
+        <section style={hero}>
+          <h1>Integrated Rubber Plantation Investment</h1>
+          <p>
+            A long-term agribusiness platform combining plantation development
+            and future processing for sustainable value creation.
+          </p>
+        </section>
+
+        {/* 
+          ⚠️ VERY IMPORTANT:
+          If you already had more homepage sections
+          (About, Investment Overview, Risk Disclosure, Contact, etc),
+          KEEP THEM BELOW — DO NOT DELETE THEM.
+        */}
+      </main>
+
     </div>
   );
 }
 
 /* ---------- STYLES ---------- */
 
-const container = {
-  fontFamily: "Arial, sans-serif"
-};
-
-const topBar = {
+const nav = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -66,7 +73,7 @@ const topBar = {
 };
 
 const hero = {
-  padding: "60px 20px",
+  padding: "80px 20px",
   textAlign: "center"
 };
 
