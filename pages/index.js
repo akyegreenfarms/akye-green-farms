@@ -32,80 +32,17 @@ export default function Home() {
       {/* About Section */}
       <section style={sectionStyle}>
         <div style={cardStyle}>
+          <h3>Rubber Plantation Investment Overview</h3>
           <p>
-            <strong>Akye Green Farms</strong> is a Ghana-based agribusiness venture focused on developing
-            <strong> large-scale rubber plantations</strong> as a sustainable raw material base for future
-            processing and export. Our model is designed to generate long-term value through agriculture and
-            industrial value addition.
-          </p>
-        </div>
-      </section>
-
-      {/* Vision */}
-      <section style={sectionStyle}>
-        <h2>Our Strategic Vision</h2>
-        <div style={cardStyle}>
-          <ul>
-            <li>Develop thousands of acres of professionally managed rubber plantations</li>
-            <li>Establish a rubber processing facility once plantations mature</li>
-            <li>Add value locally instead of exporting raw rubber</li>
-            <li>Serve regional and international export markets</li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Business Model */}
-      <section style={{ ...sectionStyle, background: "#ffffff" }}>
-        <h2>Our Two-Stage Business Model</h2>
-
-        <div style={cardStyle}>
-          <h3>Stage 1: Rubber Plantation Development</h3>
-          <p>
-            This stage focuses on land preparation, planting of high-quality rubber seedlings, and
-            professional farm management. Once mature, rubber trees can generate steady income for
-            <strong> over 40–50 years</strong>, making rubber one of the most reliable long-term agricultural assets.
-          </p>
-        </div>
-
-        <div style={cardStyle}>
-          <h3>Stage 2: Processing & Value Addition (Future Phase)</h3>
-          <p>
-            Upon plantation maturity, Akye Green Farms plans to establish a rubber processing facility.
-            This introduces a second income stream through value addition, manufacturing, and export-oriented
-            operations, independent of plantation ownership.
-          </p>
-        </div>
-      </section>
-
-      {/* Investment Packages */}
-      <section style={sectionStyle}>
-        <h2>Investment Packages</h2>
-
-        <div style={cardStyle}>
-          <h3>Rubber Plantation Investment</h3>
-          <p>
-            Akye Green Farms has secured <strong>642 acres of land</strong> under an established land tenure arrangement
-            for large-scale rubber plantation development. Due to the capital-intensive nature of rubber
-            farming, investors are invited to partner in the plantation phase.
+            Akye Green Farms has secured land for large-scale rubber plantation development under
+            established tenure arrangements. Investors are invited to participate in the plantation
+            phase as strategic partners in a long-term agribusiness project.
           </p>
 
           <ul>
-            <li><strong>Minimum investment:</strong> 5 acres</li>
-            
-            <li><strong>Investor funding period:</strong> First 2 years only</li>
-            <li><strong>Tree maturity:</strong> 6 years (latex tapping begins)</li>
+            <li><strong>Minimum participation:</strong> 5 acres</li>
+            <li><strong>Tree maturity:</strong> Approximately 6 years</li>
             <li><strong>Production lifespan:</strong> 50+ years of continuous latex production</li>
-          </ul>
-        </div>
-
-        <div style={cardStyle}>
-          <h3>Payment Structure</h3>
-          <ul>
-            <li>25% upfront payment – land preparation</li>
-            <li>75% balance – payable after land preparation</li>
-            <li>No recurring capital calls after Year 2</li>
-          </ul>
-        </div>
 
         <div style={cardStyle}>
           <h3>Profit Sharing Structure</h3>
@@ -156,8 +93,76 @@ export default function Home() {
 
       {/* Contact */}
       <section style={{ ...sectionStyle, background: "#e9f5ef" }}>
-        <h2>Contact Akye Green Farms</h2>
+        <h2>Register Your Interest</h2>
         <div style={cardStyle}>
+          <p>
+            If you are interested in participating in our rubber plantation project, please submit your
+            details below. Our team will contact you to discuss investment structure and next steps.
+          </p>
+
+          <form
+            action="https://formsubmit.co/akyefarms@gmail.com"
+            method="POST"
+            style={{ maxWidth: "600px" }}
+          >
+            <input type="hidden" name="_subject" value="New Investment Inquiry – Akye Green Farms" />
+            <input type="hidden" name="_captcha" value="false" />
+
+            <div style={{ marginBottom: "15px" }}>
+              <label>Full Name</label><br />
+              <input
+                type="text"
+                name="name"
+                required
+                style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "15px" }}>
+              <label>Email Address</label><br />
+              <input
+                type="email"
+                name="email"
+                required
+                style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "15px" }}>
+              <label>Phone / WhatsApp</label><br />
+              <input
+                type="text"
+                name="phone"
+                style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "20px" }}>
+              <label>Message</label><br />
+              <textarea
+                name="message"
+                rows="4"
+                style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid #ccc" }}
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                background: "#198754",
+                color: "white",
+                padding: "12px 25px",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer"
+              }}
+            >
+              Submit Interest
+            </button>
+          </form>
+        </div>
+
+        <div style={{ ...cardStyle, marginTop: "30px" }}>
           <p>📞 <strong>Phone / WhatsApp:</strong> +233 555 434 923</p>
           <p>📧 <strong>Email:</strong> akyefarms@gmail.com</p>
         </div>
