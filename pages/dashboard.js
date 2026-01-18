@@ -1,28 +1,28 @@
 "use client";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../lib/firebase";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (currentUser) => {
+    const unsub = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
         window.location.href = "/login";
       } else {
         setUser(currentUser);
-        setLoading(false);
+        const snap = await getDoc(doc(db, "investors", currentUser.uid));
+        setProfile(snap.data());
       }
     });
     return () => unsub();
   }, []);
 
-  if (loading) {
-    return <p style={{ padding: "40px" }}>Loading dashboard...</p>;
-  }
+  if (!profile) return <p style={{ padding: "40px" }}>Loading dashboard…</p>;
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -35,15 +35,15 @@ export default function Dashboard() {
         <h1>Investor Dashboard</h1>
 
         <div style={cardStyle}>
-          <p><strong>Logged in as:</strong> {user.email}</p>
-          <p><strong>Status:</strong> Onboarding in progress</p>
-          <p><strong>Plantation Stage:</strong> Pre-allocation</p>
+          <p><strong>Name:</strong> {profile.name}</p>
+          <p><strong>Email:</strong> {profile.email}</p>
+          <p><strong>Status:</strong> {profile.status}</p>
         </div>
 
         <div style={cardStyle}>
           <p>
-            Your investment details, plantation updates, and documents will appear
-            here once onboarding is completed.
+            Your investment details and plantation updates will appear here
+            once onboarding is completed.
           </p>
         </div>
 
