@@ -1,13 +1,14 @@
 "use client";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useState } from "react";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const [emailForReset, setEmailForReset] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -23,44 +24,102 @@ export default function Login() {
     }
   };
 
+  const resetPassword = async () => {
+    if (!emailForReset) {
+      alert("Enter your email to reset password");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, emailForReset);
+      alert("Password reset email sent");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7f6", padding: "40px" }}>
-      <div style={{ maxWidth: "500px", margin: "0 auto", background: "#fff", padding: "30px", borderRadius: "10px" }}>
-        <h2>Investor Login</h2>
+    <div style={container}>
+      <div style={card}>
+        <h2>Login</h2>
 
-        <form onSubmit={handleSubmit}>
-          <label>Email Address</label><br />
-          <input type="email" name="email" required style={inputStyle} /><br /><br />
+        <form onSubmit={handleLogin}>
+          <label>Email</label>
+          <input type="email" name="email" required style={input} />
 
-          <label>Password</label><br />
-          <input type="password" name="password" required style={inputStyle} /><br /><br />
+          <label>Password</label>
+          <input type="password" name="password" required style={input} />
 
-          <button type="submit" style={buttonStyle} disabled={loading}>
+          <button style={btn} disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p style={{ marginTop: "15px" }}>
-          New investor? <a href="/signup">Create an account</a>
+        <hr />
+
+        <h4>Forgot password?</h4>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={emailForReset}
+          onChange={(e) => setEmailForReset(e.target.value)}
+          style={input}
+        />
+        <button onClick={resetPassword} style={resetBtn}>
+          Reset Password
+        </button>
+
+        <p>
+          New here? <a href="/signup">Create an account</a>
+        </p>
+
+        <p>
+          <a href="/">← Back to Home</a>
         </p>
       </div>
     </div>
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  padding: "10px",
-  borderRadius: "6px",
-  border: "1px solid #ccc"
+/* ---------- STYLES ---------- */
+
+const container = {
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "#f5f7f6"
 };
 
-const buttonStyle = {
+const card = {
+  background: "#fff",
+  padding: "30px",
+  borderRadius: "10px",
+  width: "350px"
+};
+
+const input = {
+  width: "100%",
+  padding: "8px",
+  margin: "8px 0"
+};
+
+const btn = {
+  width: "100%",
   background: "#198754",
   color: "#fff",
-  padding: "12px",
+  padding: "10px",
   border: "none",
-  borderRadius: "8px",
-  width: "100%",
+  borderRadius: "6px",
   cursor: "pointer"
+};
+
+const resetBtn = {
+  width: "100%",
+  background: "#0d6efd",
+  color: "#fff",
+  padding: "8px",
+  border: "none",
+  borderRadius: "6px",
+  marginTop: "5px"
 };
