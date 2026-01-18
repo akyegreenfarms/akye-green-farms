@@ -76,8 +76,15 @@ export default function Home() {
       </ul>
 
       <h2>Contact Akye Green Farms</h2>
-      <p>Email: <strong>akyefarms@gmail.com</strong></p>
-      <p>Website: https://akye-green-farms.vercel.app/</p>
+      <p>
+        For investment inquiries, partnerships, or further information, please reach out to us directly:
+      </p>
+      <p>
+        📞 <strong>Phone / WhatsApp:</strong> +233 555 434 923
+      </p>
+      <p>
+        📧 <strong>Email:</strong> akyefarms@gmail.com
+      </p>
 
       <footer style={{ marginTop: "40px", color: "#555" }}>
         © {new Date().getFullYear()} Akye Green Farms. All rights reserved.
