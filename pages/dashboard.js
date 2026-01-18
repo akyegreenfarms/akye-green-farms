@@ -1,25 +1,53 @@
+"use client";
+
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
+import { useEffect, useState } from "react";
+
 export default function Dashboard() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) {
+        window.location.href = "/login";
+      } else {
+        setUser(currentUser);
+        setLoading(false);
+      }
+    });
+    return () => unsub();
+  }, []);
+
+  if (loading) {
+    return <p style={{ padding: "40px" }}>Loading dashboard...</p>;
+  }
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    window.location.href = "/login";
+  };
+
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7f6", padding: "40px" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <h1>Investor Dashboard</h1>
 
         <div style={cardStyle}>
-          <h3>Welcome to Akye Green Farms</h3>
-          <p>Status: <strong>Onboarding in progress</strong></p>
-          <p>Plantation Stage: <strong>Pre-allocation</strong></p>
+          <p><strong>Logged in as:</strong> {user.email}</p>
+          <p><strong>Status:</strong> Onboarding in progress</p>
+          <p><strong>Plantation Stage:</strong> Pre-allocation</p>
         </div>
 
         <div style={cardStyle}>
           <p>
-            Your investment details, plantation updates, and documents will appear here
-            once onboarding is completed.
+            Your investment details, plantation updates, and documents will appear
+            here once onboarding is completed.
           </p>
         </div>
 
-        <a href="/">
-          <button style={buttonStyle}>Back to Website</button>
-        </a>
+        <button onClick={handleLogout} style={buttonStyle}>Logout</button>
       </div>
     </div>
   );
