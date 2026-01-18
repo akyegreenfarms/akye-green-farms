@@ -1,9 +1,16 @@
+"use client";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import { useState } from "react";
 
 export default function Signup() {
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -12,6 +19,7 @@ export default function Signup() {
       window.location.href = "/dashboard";
     } catch (error) {
       alert(error.message);
+      setLoading(false);
     }
   };
 
@@ -28,7 +36,9 @@ export default function Signup() {
           <label>Password</label><br />
           <input type="password" name="password" required style={inputStyle} /><br /><br />
 
-          <button type="submit" style={buttonStyle}>Create Account</button>
+          <button type="submit" style={buttonStyle} disabled={loading}>
+            {loading ? "Creating account..." : "Create Account"}
+          </button>
         </form>
 
         <p style={{ marginTop: "15px" }}>
