@@ -63,7 +63,7 @@ export default function Home() {
           <p>
             This stage focuses on land preparation, planting of high-quality rubber seedlings, and
             professional farm management. Once mature, rubber trees can generate steady income for
-            <strong> over 40 years</strong>.
+            <strong> over 40–50 years</strong>, making rubber one of the most reliable long-term agricultural assets.
           </p>
         </div>
 
@@ -71,8 +71,61 @@ export default function Home() {
           <h3>Stage 2: Processing & Value Addition (Future Phase)</h3>
           <p>
             Upon plantation maturity, Akye Green Farms plans to establish a rubber processing facility.
-            Processing introduces a second income stream through manufacturing, value addition, and
-            export-oriented operations.
+            This introduces a second income stream through value addition, manufacturing, and export-oriented
+            operations, independent of plantation ownership.
+          </p>
+        </div>
+      </section>
+
+      {/* Investment Packages */}
+      <section style={sectionStyle}>
+        <h2>Investment Packages</h2>
+
+        <div style={cardStyle}>
+          <h3>Rubber Plantation Investment</h3>
+          <p>
+            Akye Green Farms has secured <strong>642 acres of land</strong> under an established land tenure arrangement
+            for large-scale rubber plantation development. Due to the capital-intensive nature of rubber
+            farming, investors are invited to partner in the plantation phase.
+          </p>
+
+          <ul>
+            <li><strong>Minimum investment:</strong> 5 acres</li>
+            
+            <li><strong>Investor funding period:</strong> First 2 years only</li>
+            <li><strong>Tree maturity:</strong> 6 years (latex tapping begins)</li>
+            <li><strong>Production lifespan:</strong> 50+ years of continuous latex production</li>
+          </ul>
+        </div>
+
+        <div style={cardStyle}>
+          <h3>Payment Structure</h3>
+          <ul>
+            <li>25% upfront payment – land preparation</li>
+            <li>75% balance – payable after land preparation</li>
+            <li>No recurring capital calls after Year 2</li>
+          </ul>
+        </div>
+
+        <div style={cardStyle}>
+          <h3>Profit Sharing Structure</h3>
+          <p>
+            Upon commencement of latex production, proceeds are shared equally under the land tenure
+            arrangement:
+          </p>
+          <ul>
+            <li>Landowners – 1/3</li>
+            <li>Investor – 1/3</li>
+            <li>Akye Green Farms – 1/3</li>
+          </ul>
+        </div>
+
+        <div style={cardStyle}>
+          <h3>Security & Documentation</h3>
+          <p>
+            Every investment is fully documented. Site plans and indentures are prepared for each
+            investor’s allocated acres and authenticated at the High Court, ensuring strong legal
+            protection and transparency.
           </p>
         </div>
       </section>
