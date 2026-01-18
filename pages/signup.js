@@ -25,7 +25,15 @@ export default function Signup() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#f5f7f6", padding: "40px" }}>
-      <div style={{ maxWidth: "500px", margin: "0 auto", background: "#fff", padding: "30px", borderRadius: "10px" }}>
+      <div
+        style={{
+          maxWidth: "500px",
+          margin: "0 auto",
+          background: "#ffffff",
+          padding: "30px",
+          borderRadius: "12px"
+        }}
+      >
         <h2>Investor Sign Up</h2>
         <p>Create your investor account to access the Akye Green Farms portal.</p>
 
