@@ -1,3 +1,4 @@
+// PUBLIC HOME PAGE
 export default function Home() {
   const sectionStyle = {
     maxWidth: "1100px",
@@ -43,6 +44,9 @@ export default function Home() {
             <li><strong>Minimum participation:</strong> 5 acres</li>
             <li><strong>Tree maturity:</strong> Approximately 6 years</li>
             <li><strong>Production lifespan:</strong> 50+ years of continuous latex production</li>
+            <li><strong>Investor engagement:</strong> Structured long-term participation</li>
+          </ul>
+        </div>
 
         <div style={cardStyle}>
           <h3>Profit Sharing Structure</h3>
