@@ -17,11 +17,15 @@ export default function Signup() {
     const password = e.target.password.value;
 
     try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
-
-      await setDoc(doc(db, "investors", userCred.user.uid), {
-        name,
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
         email,
+        password
+      );
+
+      await setDoc(doc(db, "investors", userCredential.user.uid), {
+        name: name,
+        email: email,
         status: "Onboarding",
         createdAt: new Date()
       });
@@ -34,27 +38,62 @@ export default function Signup() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7f6", padding: "40px" }}>
-      <div style={{ maxWidth: "500px", margin: "0 auto", background: "#fff", padding: "30px", borderRadius: "12px" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f5f7f6",
+        padding: "40px"
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "500px",
+          margin: "0 auto",
+          background: "#ffffff",
+          padding: "30px",
+          borderRadius: "12px"
+        }}
+      >
         <h2>Investor Sign Up</h2>
+        <p>Create your investor account to access the Akye Green Farms portal.</p>
 
         <form onSubmit={handleSubmit}>
-  <p style={{ marginTop: "15px" }}>
-  Already registered? <a href="/login">Login here</a>
-</p>
           <label>Full Name</label><br />
-          <input type="text" name="name" required style={inputStyle} /><br /><br />
+          <input
+            type="text"
+            name="name"
+            required
+            style={inputStyle}
+          /><br /><br />
 
           <label>Email Address</label><br />
-          <input type="email" name="email" required style={inputStyle} /><br /><br />
+          <input
+            type="email"
+            name="email"
+            required
+            style={inputStyle}
+          /><br /><br />
 
           <label>Password</label><br />
-          <input type="password" name="password" required style={inputStyle} /><br /><br />
+          <input
+            type="password"
+            name="password"
+            required
+            style={inputStyle}
+          /><br /><br />
 
-          <button type="submit" style={buttonStyle} disabled={loading}>
+          <button
+            type="submit"
+            style={buttonStyle}
+            disabled={loading}
+          >
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
+
+        <p style={{ marginTop: "15px" }}>
+          Already registered? <a href="/login">Login here</a>
+        </p>
       </div>
     </div>
   );
@@ -69,13 +108,10 @@ const inputStyle = {
 
 const buttonStyle = {
   background: "#198754",
-  color: "#fff",
+  color: "#ffffff",
   padding: "12px",
   border: "none",
   borderRadius: "8px",
   width: "100%",
   cursor: "pointer"
 };
- 
-
- 
