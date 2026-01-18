@@ -39,6 +39,9 @@ export default function Signup() {
         <h2>Investor Sign Up</h2>
 
         <form onSubmit={handleSubmit}>
+  <p style={{ marginTop: "15px" }}>
+  Already registered? <a href="/login">Login here</a>
+</p>
           <label>Full Name</label><br />
           <input type="text" name="name" required style={inputStyle} /><br /><br />
 
@@ -73,8 +76,6 @@ const buttonStyle = {
   width: "100%",
   cursor: "pointer"
 };
- <p style={{ marginTop: "15px" }}>
-  Already registered? <a href="/login">Login here</a>
-</p>
+ 
 
  
