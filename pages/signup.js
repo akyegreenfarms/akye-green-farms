@@ -73,5 +73,8 @@ const buttonStyle = {
   width: "100%",
   cursor: "pointer"
 };
- 
+ <p style={{ marginTop: "15px" }}>
+  Already registered? <a href="/login">Login here</a>
+</p>
+
  
