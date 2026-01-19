@@ -1,185 +1,115 @@
+// DASHBOARD LANDING PAGE – AKYE GREEN FARMS (INVESTOR VIEW)
 "use client";
 
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../lib/firebase";
 import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [editing, setEditing] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (currentUser) => {
-      if (!currentUser) {
+    const unsub = onAuthStateChanged(auth, async (u) => {
+      if (!u) {
         window.location.href = "/login";
         return;
       }
+      setUser(u);
 
-      setUser(currentUser);
-
-      const ref = doc(db, "investors", currentUser.uid);
+      const ref = doc(db, "investors", u.uid);
       const snap = await getDoc(ref);
+      if (snap.exists()) setProfile(snap.data());
 
-      if (!snap.exists()) {
-        const newProfile = {
-          name: currentUser.email.split("@")[0],
-          email: currentUser.email,
-          phone: "",
-          acreage: 0,
-          project: "Rubber Plantation Project",
-          status: "Onboarding",
-          createdAt: new Date()
-        };
-        await setDoc(ref, newProfile);
-        setProfile(newProfile);
-      } else {
-        setProfile(snap.data());
-      }
+      setLoading(false);
     });
-
     return () => unsub();
   }, []);
 
-  if (!profile) return <p style={{ padding: "40px" }}>Loading dashboard...</p>;
-
-  const saveProfile = async () => {
-    setSaving(true);
-    await updateDoc(doc(db, "investors", user.uid), {
-      name: profile.name,
-      phone: profile.phone
-    });
-    setSaving(false);
-    setEditing(false);
-  };
-
-  const logout = async () => {
-    await signOut(auth);
-    window.location.href = "/login";
-  };
+  if (loading) return <p style={{ padding: 40 }}>Loading dashboard...</p>;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7f6", padding: "40px" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <h1>Investor Dashboard</h1>
+    <div style={layout}>
+      {/* SIDEBAR */}
+      <aside style={sidebar}>
+        <h3 style={{ marginBottom: 30 }}>Akye Green Farms</h3>
+        <nav style={navList}>
+          <a style={navItem}>Dashboard</a>
+          <a style={navItem}>My Investment</a>
+          <a style={navItem}>Progress Updates</a>
+          <a style={navItem}>Lifecycle Timeline</a>
+          <a style={navItem}>Documents</a>
+          <a style={navItem}>Support</a>
+        </nav>
+      </aside>
 
-        {/* PROFILE */}
-        <Section title="Investor Profile">
-          <Grid>
-            <Editable
-              label="Full Name"
-              value={profile.name}
-              editing={editing}
-              onChange={(v) => setProfile({ ...profile, name: v })}
-            />
-            <ReadOnly label="Email" value={profile.email} />
-            <Editable
-              label="Phone"
-              value={profile.phone}
-              editing={editing}
-              onChange={(v) => setProfile({ ...profile, phone: v })}
-            />
-            <ReadOnly label="Project" value={profile.project} />
-            <ReadOnly label="Allocated Acreage" value={`${profile.acreage} Acres`} />
-            <ReadOnly label="Status" value={profile.status} />
-          </Grid>
+      {/* MAIN */}
+      <main style={main}>
+        {/* TOP BAR */}
+        <div style={topbar}>
+          <h2>Dashboard</h2>
+          <span>{profile?.fullName}</span>
+        </div>
 
-          {!editing ? (
-            <button style={btn} onClick={() => setEditing(true)}>Edit Profile</button>
-          ) : (
-            <button style={btn} onClick={saveProfile}>
-              {saving ? "Saving..." : "Save Changes"}
-            </button>
-          )}
-        </Section>
+        {/* STATUS CARDS */}
+        <div style={cards}>
+          <div style={card}><h4>Allocated Acreage</h4><p>{profile?.acreage || "—"} Acres</p></div>
+          <div style={card}><h4>Project Stage</h4><p>{profile?.stage || "Plantation Establishment"}</p></div>
+          <div style={card}><h4>Investment Status</h4><p>{profile?.status || "Active"}</p></div>
+          <div style={card}><h4>Last Update</h4><p>{profile?.lastUpdate || "—"}</p></div>
+        </div>
 
-        {/* INVESTMENT OVERVIEW */}
-        <Section title="Investment Overview">
-          <Grid>
-            <ReadOnly label="Total Acreage" value={`${profile.acreage} Acres`} />
-            <ReadOnly label="Investment Commitment" value="Disclosed on request" />
-            <ReadOnly label="Amount Paid" value="—" />
-            <ReadOnly label="Outstanding Balance" value="—" />
-          </Grid>
-        </Section>
+        {/* SUMMARY */}
+        <section style={panel}>
+          <h3>Your Investment Summary</h3>
+          <div style={twoCol}>
+            <div>
+              <p><strong>Investor ID:</strong> {user.uid.slice(0, 8)}</p>
+              <p><strong>Project:</strong> Rubber Plantation Project</p>
+              <p><strong>Start Date:</strong> {profile?.startDate || "—"}</p>
+            </div>
+            <div>
+              <p><strong>Allocated Block:</strong> {profile?.block || "—"}</p>
+              <p><strong>Participation:</strong> Long-term Agribusiness</p>
+              <p><strong>Production Window:</strong> Year 6 onward</p>
+            </div>
+          </div>
+        </section>
 
-        <button onClick={logout} style={btn}>Logout</button>
-      </div>
+        {/* LATEST UPDATE */}
+        <section style={panel}>
+          <h3>Latest Project Update</h3>
+          <p>{profile?.latestNote || "No updates posted yet."}</p>
+        </section>
+
+        {/* LIFECYCLE */}
+        <section style={panel}>
+          <h3>Lifecycle Timeline</h3>
+          <div style={timeline}>
+            <span>Land Secured ✓</span>
+            <span>Land Prepared ✓</span>
+            <span style={active}>Planting</span>
+            <span>Immature</span>
+            <span>Production</span>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
 
-/* ---------- COMPONENTS ---------- */
-
-function Section({ title, children }) {
-  return <div style={section}><h2>{title}</h2>{children}</div>;
-}
-
-function Grid({ children }) {
-  return <div style={grid}>{children}</div>;
-}
-
-function Editable({ label, value, editing, onChange }) {
-  return (
-    <div style={card}>
-      <strong>{label}</strong>
-      {editing ? (
-        <input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          style={input}
-        />
-      ) : (
-        <p>{value || "—"}</p>
-      )}
-    </div>
-  );
-}
-
-function ReadOnly({ label, value }) {
-  return (
-    <div style={card}>
-      <strong>{label}</strong>
-      <p>{value}</p>
-    </div>
-  );
-}
-
-/* ---------- STYLES ---------- */
-
-const section = {
-  background: "#fff",
-  padding: "25px",
-  borderRadius: "12px",
-  marginBottom: "30px"
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-  gap: "15px"
-};
-
-const card = {
-  background: "#f9fafb",
-  padding: "15px",
-  borderRadius: "8px"
-};
-
-const input = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "5px"
-};
-
-const btn = {
-  marginTop: "15px",
-  background: "#198754",
-  color: "#fff",
-  padding: "10px 18px",
-  border: "none",
-  borderRadius: "8px",
-  cursor: "pointer"
-};
+/* STYLES */
+const layout = { display: "flex", minHeight: "100vh", fontFamily: "Arial" };
+const sidebar = { width: 240, background: "#0f5132", color: "#fff", padding: 20 };
+const navList = { display: "flex", flexDirection: "column", gap: 12 };
+const navItem = { color: "#fff", textDecoration: "none", cursor: "pointer", padding: "6px 0" };
+const main = { flex: 1, background: "#f5f7f6", padding: 30 };
+const topbar = { display: "flex", justifyContent: "space-between", marginBottom: 30 };
+const cards = { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 20 };
+const card = { background: "#fff", padding: 20, borderRadius: 10 };
+const panel = { background: "#fff", padding: 25, borderRadius: 10, marginTop: 30 };
+const twoCol = { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 };
+const timeline = { display: "flex", gap: 15, marginTop: 10 };
+const active = { fontWeight: "bold", color: "#198754" };
