@@ -47,6 +47,7 @@ export default function Dashboard() {
           <NavItem label="My Investment" active={active} onClick={() => setActive("investment")} />
           <NavItem label="Progress Updates" active={active} onClick={() => setActive("updates")} />
           <NavItem label="Lifecycle Timeline" active={active} onClick={() => setActive("lifecycle")} />
+          <NavItem label="Plantation Map" active={active} onClick={() => setActive("map")} />
           <NavItem label="Documents" active={active} onClick={() => setActive("documents")} />
           <NavItem label="Support" active={active} onClick={() => setActive("support")} />
         </nav>
@@ -58,6 +59,7 @@ export default function Dashboard() {
       <main style={main}>
         <h2 style={{ marginBottom: 20 }}>
           {active === "dashboard" && "Dashboard"}
+          {active === "map" && <Map />}
           {active === "investment" && "My Investment"}
           {active === "updates" && "Progress Updates"}
           {active === "lifecycle" && "Lifecycle Timeline"}
@@ -136,6 +138,14 @@ function Lifecycle() {
   return (
     <Panel title="Lifecycle Timeline">
       <p>Land Secured → Land Prepared → Planting → Immature → Production</p>
+    </Panel>
+  );
+}
+
+function Map() {
+  return (
+    <Panel title="Plantation Map">
+      <p>Map view will be introduced in Phase 3.</p>
     </Panel>
   );
 }
