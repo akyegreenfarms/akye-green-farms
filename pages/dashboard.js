@@ -62,7 +62,7 @@ export default function Dashboard() {
           {active === "investment" && "My Investment"}
           {active === "updates" && "Progress Updates"}
           {active === "lifecycle" && "Lifecycle Timeline"}
-          {active === "map" && <Map />}
+          {active === "map" && "Map"}
           {active === "documents" && "Documents"}
           {active === "support" && "Support"}
         </h2>
