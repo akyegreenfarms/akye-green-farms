@@ -47,7 +47,7 @@ export default function Dashboard() {
           <NavItem label="My Investment" active={active} onClick={() => setActive("investment")} />
           <NavItem label="Progress Updates" active={active} onClick={() => setActive("updates")} />
           <NavItem label="Lifecycle Timeline" active={active} onClick={() => setActive("lifecycle")} />
-          <NavItem label="Plantation My own Map" active={active} onClick={() => setActive("map to go")} />
+          <NavItem label="Plantation Map" active={active} onClick={() => setActive("map")} />
           <NavItem label="Documents" active={active} onClick={() => setActive("documents")} />
           <NavItem label="Support" active={active} onClick={() => setActive("support")} />
         </nav>
@@ -62,7 +62,7 @@ export default function Dashboard() {
           {active === "investment" && "My Investment"}
           {active === "updates" && "Progress Updates"}
           {active === "lifecycle" && "Lifecycle Timeline"}
-          {active === "map to go" && <Map come />}
+          {active === "map" && <Map />}
           {active === "documents" && "Documents"}
           {active === "support" && "Support"}
         </h2>
