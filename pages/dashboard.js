@@ -44,9 +44,9 @@ export default function Dashboard() {
 
         <nav style={navList}>
           <NavItem label="Dashboard" active={active} onClick={() => setActive("dashboard")} />
-          <NavItem label="My Investment" active={active} onClick={() => setActive("investment")} />
-          <NavItem label="Progress Updates" active={active} onClick={() => setActive("updates")} />
-          <NavItem label="Lifecycle Timeline" active={active} onClick={() => setActive("lifecycle")} />
+          //<NavItem label="My Investment" active={active} onClick={() => setActive("investment")} />
+          //<NavItem label="Progress Updates" active={active} onClick={() => setActive("updates")} />
+          //<NavItem label="Lifecycle Timeline" active={active} onClick={() => setActive("lifecycle")} />
           <NavItem label="Plantation Map" active={active} onClick={() => setActive("map")} />
           <NavItem label="Documents" active={active} onClick={() => setActive("documents")} />
           <NavItem label="Support" active={active} onClick={() => setActive("support")} />
