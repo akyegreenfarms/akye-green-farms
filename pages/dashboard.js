@@ -43,6 +43,7 @@ export default function Dashboard() {
         <h3 style={{ marginBottom: 30 }}>Akye Green Farms</h3>
 
         <nav style={navList}>
+          <NavItem label="Account Profile" active={active} onClick={() => setActive("profile")} />
           <NavItem label="Dashboard" active={active} onClick={() => setActive("dashboard")} />
           <NavItem label="My Investment" active={active} onClick={() => setActive("investment")} />
           <NavItem label="Progress Updates" active={active} onClick={() => setActive("updates")} />
@@ -68,6 +69,7 @@ export default function Dashboard() {
         </h2>
 
         {active === "dashboard" && <DashboardHome profile={profile} />}
+        {active === "profile" && <AccountProfile profile={profile} />}
         {active === "investment" && <Investment profile={profile} />}
         {active === "updates" && <Updates />}
         {active === "lifecycle" && <Lifecycle />}
@@ -107,6 +109,19 @@ function DashboardHome({ profile }) {
         <Card title="Last Update" value="—" />
       </div>
 
+  function AccountProfile({ profile }) {
+  return (
+    <Panel title="Account Profile">
+      <p><strong>First Name:</strong> {profile?.firstName || "—"}</p>
+      <p><strong>Last Name:</strong> {profile?.lastName || "—"}</p>
+      <p><strong>Other Names:</strong> {profile?.otherNames || "—"}</p>
+      <p><strong>Gender:</strong> {profile?.gender || "—"}</p>
+      <p><strong>Date of Birth:</strong> {profile?.dob || "—"}</p>
+      <p><strong>Phone Number:</strong> {profile?.phone || "—"}</p>
+      <p><strong>Email:</strong> {profile?.email}</p>
+    </Panel>
+  );
+}
       <Panel title="Your Investment Summary">
         <p><strong>Project:</strong> Rubber Plantation Project</p>
         <p><strong>Participation:</strong> Long-term Agribusiness</p>
