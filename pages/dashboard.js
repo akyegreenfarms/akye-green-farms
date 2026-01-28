@@ -109,19 +109,24 @@ function DashboardHome({ profile }) {
         <Card title="Last Update" value="—" />
       </div>
 
-  function AccountProfile({ profile }) {
+  function AccountProfile({ profile, user }) {
   return (
     <Panel title="Account Profile">
       <p><strong>First Name:</strong> {profile?.firstName || "—"}</p>
       <p><strong>Last Name:</strong> {profile?.lastName || "—"}</p>
       <p><strong>Other Names:</strong> {profile?.otherNames || "—"}</p>
+      <p><strong>Phone Number:</strong> {profile?.phone || "—"}</p>
       <p><strong>Gender:</strong> {profile?.gender || "—"}</p>
       <p><strong>Date of Birth:</strong> {profile?.dob || "—"}</p>
-      <p><strong>Phone Number:</strong> {profile?.phone || "—"}</p>
-      <p><strong>Email:</strong> {profile?.email}</p>
+
+      <hr />
+
+      <p><strong>Email (read-only):</strong> {user?.email}</p>
+      <p><strong>Investor ID:</strong> {user?.uid}</p>
     </Panel>
   );
-}
+
+  }
       <Panel title="Your Investment Summary">
         <p><strong>Project:</strong> Rubber Plantation Project</p>
         <p><strong>Participation:</strong> Long-term Agribusiness</p>
